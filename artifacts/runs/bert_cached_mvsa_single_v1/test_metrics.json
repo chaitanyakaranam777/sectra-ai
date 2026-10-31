@@ -1,0 +1,77 @@
+{
+  "run": "bert_cached_mvsa_single_v1",
+  "model": "bert",
+  "split": "test",
+  "test_fingerprint": "d28a38abf97419d152bc60dc9e356dbe5319d1f96d44193832278c4a66feccbc",
+  "metrics": {
+    "n_samples": 451,
+    "accuracy": 0.6297117516629712,
+    "precision_macro": 0.562984452232549,
+    "recall_macro": 0.6129741436973369,
+    "f1_macro": 0.5671862291474721,
+    "f1_weighted": 0.6482741292539542,
+    "roc_auc_ovr_macro": 0.7767724945463722,
+    "per_class": {
+      "negative": {
+        "precision": 0.6124031007751938,
+        "recall": 0.5851851851851851,
+        "f1": 0.5984848484848485,
+        "support": 135
+      },
+      "neutral": {
+        "precision": 0.2828282828282828,
+        "recall": 0.5957446808510638,
+        "f1": 0.3835616438356164,
+        "support": 47
+      },
+      "positive": {
+        "precision": 0.7937219730941704,
+        "recall": 0.6579925650557621,
+        "f1": 0.7195121951219512,
+        "support": 269
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "matrix": [
+        [
+          79,
+          19,
+          37
+        ],
+        [
+          10,
+          28,
+          9
+        ],
+        [
+          40,
+          52,
+          177
+        ]
+      ],
+      "normalized": [
+        [
+          0.585185,
+          0.140741,
+          0.274074
+        ],
+        [
+          0.212766,
+          0.595745,
+          0.191489
+        ],
+        [
+          0.148699,
+          0.193309,
+          0.657993
+        ]
+      ]
+    },
+    "classification_report": "              precision    recall  f1-score   support\n\n    negative       0.61      0.59      0.60       135\n     neutral       0.28      0.60      0.38        47\n    positive       0.79      0.66      0.72       269\n\n    accuracy                           0.63       451\n   macro avg       0.56      0.61      0.57       451\nweighted avg       0.69      0.63      0.65       451\n"
+  }
+}

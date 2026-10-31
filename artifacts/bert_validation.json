@@ -1,0 +1,17 @@
+{
+  "split": "val",
+  "test_fingerprint": "60c9838bcf2cfb99eed978055f06bf03f2ac5e7e0b2f3b6a4ebce914c3b2499a",
+  "n_samples": 451,
+  "ranking": [
+    {
+      "run": "bert_mvsa_single_v1",
+      "model": "bert",
+      "accuracy": 0.6518847007,
+      "precision_macro": 0.6043724651,
+      "recall_macro": 0.5375275246,
+      "f1_macro": 0.5373814363,
+      "f1_weighted": 0.645579043,
+      "roc_auc_ovr_macro": 0.7728050347
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "cnn",
+  "modality": "image",
+  "required_inputs": [
+    "image"
+  ],
+  "classes": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "parameters_total": 11242563,
+  "parameters_trainable": 66051,
+  "components": [
+    {
+      "name": "image_encoder",
+      "type": "ImageEncoder",
+      "parameters": 11176512
+    },
+    {
+      "name": "classifier",
+      "type": "Sequential",
+      "parameters": 66051
+    }
+  ],
+  "config": {
+    "num_classes": 3,
+    "backbone": "resnet18",
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "pretrained": true,
+    "hidden_dim": 128,
+    "dropout": 0.3,
+    "freeze_backbone": true
+  }
+}

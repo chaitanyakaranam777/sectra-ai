@@ -1,0 +1,44 @@
+{
+  "model": "cnn",
+  "dataset": "mvsa_single",
+  "data": {
+    "image_size": 224,
+    "max_text_len": 64,
+    "vocab_max_size": 20000,
+    "vocab_min_freq": 2,
+    "val_size": 0.1,
+    "test_size": 0.1,
+    "bert_tokenizer": "bert-base-uncased"
+  },
+  "training": {
+    "epochs": 3,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "label_smoothing": 0.0,
+    "grad_clip": 1.0,
+    "early_stopping_patience": 4,
+    "monitor": "val_macro_f1",
+    "use_amp": false,
+    "device": "cpu",
+    "batch_size": 16,
+    "use_class_weights": true
+  },
+  "model_params": {
+    "num_classes": 3,
+    "backbone": "scratch",
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "pretrained": false,
+    "hidden_dim": 128,
+    "dropout": 0.4
+  },
+  "samples_csv": "data/processed/mvsa_single/samples.csv",
+  "n_train": 3608,
+  "n_val": 451
+}

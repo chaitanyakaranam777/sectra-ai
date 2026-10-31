@@ -1,0 +1,85 @@
+{
+  "dataset": "MVSA-Single",
+  "variant": "single",
+  "seed": 42,
+  "raw_label_rows": 4869,
+  "malformed_label_rows": 0,
+  "invalid_records": {
+    "image_blank_image": 1
+  },
+  "dropped_unlabeled": {
+    "text_image_conflict": 358
+  },
+  "duplicates": {
+    "duplicate_ids": 0,
+    "duplicate_images": 42,
+    "duplicate_texts": 266,
+    "rows_in_duplicate_image_groups": 82,
+    "rows_in_duplicate_text_groups": 438
+  },
+  "final_samples": 4510,
+  "class_distribution": {
+    "negative": 1357,
+    "neutral": 470,
+    "positive": 2683
+  },
+  "imbalance_ratio_max_over_min": 5.708510638297873,
+  "class_weights_train": {
+    "negative": 1.1064090728759766,
+    "neutral": 3.1985814571380615,
+    "positive": 0.5606837868690491
+  },
+  "splits": {
+    "train": {
+      "n": 3608,
+      "class_counts": {
+        "negative": 1087,
+        "neutral": 376,
+        "positive": 2145
+      },
+      "fraction": 0.8
+    },
+    "val": {
+      "n": 451,
+      "class_counts": {
+        "negative": 135,
+        "neutral": 47,
+        "positive": 269
+      },
+      "fraction": 0.1
+    },
+    "test": {
+      "n": 451,
+      "class_counts": {
+        "negative": 135,
+        "neutral": 47,
+        "positive": 269
+      },
+      "fraction": 0.1
+    }
+  },
+  "leakage_check": {
+    "checked": [
+      "group_id",
+      "id",
+      "image_md5",
+      "text_key"
+    ],
+    "leaking_keys": 0
+  },
+  "text_length_words": {
+    "count": 4510,
+    "mean": 13.715742793791573,
+    "median": 13.0,
+    "p95": 23.0,
+    "max": 119,
+    "min": 0
+  },
+  "image_size_px": {
+    "mean_width": 551.4614190687362,
+    "mean_height": 527.9215077605321,
+    "min_side": 48
+  },
+  "duration_s": 18.001033067703247,
+  "samples_csv": "data\\processed\\mvsa_single\\samples.csv"
+}

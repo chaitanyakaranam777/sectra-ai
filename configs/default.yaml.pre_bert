@@ -1,0 +1,40 @@
+# SENTRA AI default configuration. Keys under `models.<name>` are constructor arguments of that architecture.
+seed: 42
+
+data:
+  image_size: 128
+  max_text_len: 64
+  vocab_max_size: 20000
+  vocab_min_freq: 2
+  val_size: 0.1
+  test_size: 0.1
+  bert_tokenizer: bert-base-uncased     # needs internet on first use (cached afterwards) or a local path
+
+training:
+  epochs: 15
+  batch_size: 32
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw                       # adam | adamw
+  scheduler: cosine                      # none | cosine | step | plateau
+  label_smoothing: 0.0
+  grad_clip: 1.0
+  early_stopping_patience: 4
+  monitor: val_macro_f1                  # val_loss | val_acc | val_macro_f1
+  use_class_weights: true
+  use_amp: false
+  device: auto                           # auto | cpu | cuda
+
+models:
+  cnn:      {backbone: resnet18, channels: [32, 64, 128, 256], pretrained: true, freeze_backbone: true, hidden_dim: 128, dropout: 0.3}
+  lstm:     {embed_dim: 128, hidden_dim: 128, num_layers: 1, bidirectional: true, dropout: 0.4, head_hidden_dim: 64}
+  bert:     {pretrained_name: bert-base-uncased, freeze_encoder: false, dropout: 0.3, head_hidden_dim: 128}
+  cnn_lstm: {image_backbone: scratch, image_channels: [32, 64, 128, 256], embed_dim: 128, lstm_hidden_dim: 128,
+             lstm_layers: 1, bidirectional: true, proj_dim: 256, fusion_hidden: [256, 128], dropout: 0.4}
+  cnn_bert: {image_backbone: scratch, image_channels: [32, 64, 128, 256], pretrained_name: bert-base-uncased,
+             freeze_encoder: false, proj_dim: 256, fusion_hidden: [256, 128], dropout: 0.3}
+
+# Per-model overrides applied on top of `training` (BERT needs a much smaller step).
+training_overrides:
+  bert:     {lr: 0.00003, batch_size: 16, pretrained_lr_scale: 1.0, weight_decay: 0.01}
+  cnn_bert: {lr: 0.0003, batch_size: 16, pretrained_lr_scale: 0.1, weight_decay: 0.01}

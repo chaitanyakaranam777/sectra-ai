@@ -1,0 +1,24 @@
+{
+  "state": "failed",
+  "total_epochs": 3,
+  "device": "cpu",
+  "model": "bert",
+  "started_at": 1793440225.7236054,
+  "epoch": 3,
+  "batch": 140,
+  "batches_per_epoch": 451,
+  "running_train_loss": 0.944040559232235,
+  "last_epoch": {
+    "epoch": 2,
+    "train_loss": 0.9750513852369495,
+    "train_acc": 0.5781596452328159,
+    "val_loss": 0.9641638316230605,
+    "val_acc": 0.6718403547671841,
+    "val_macro_f1": 0.5341086549975687,
+    "lr": 0.0002500000000000001,
+    "duration_s": 655.1864717006683
+  },
+  "best_epoch": 1,
+  "best_metric": 0.5373814363143631,
+  "error": "KeyboardInterrupt: "
+}

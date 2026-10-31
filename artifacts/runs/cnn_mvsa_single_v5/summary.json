@@ -1,0 +1,27 @@
+{
+  "model": "cnn",
+  "device": "cpu",
+  "epochs_run": 1,
+  "best_epoch": 1,
+  "monitor": "val_macro_f1",
+  "best_metric": 0.2490740740740741,
+  "stopped_early": false,
+  "duration_s": 189.61334252357483,
+  "config": {
+    "epochs": 1,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "label_smoothing": 0.0,
+    "grad_clip": 1.0,
+    "early_stopping_patience": 4,
+    "min_delta": 0.0001,
+    "monitor": "val_macro_f1",
+    "pretrained_lr_scale": 1.0,
+    "use_amp": false,
+    "device": "cpu",
+    "seed": 42
+  },
+  "parameters": 1206499
+}

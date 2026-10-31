@@ -1,0 +1,10 @@
+{
+  "model": "cnn_bert",
+  "dataset": "mvsa_single",
+  "best_epoch": 4,
+  "best_validation_macro_f1": 0.613385960444784,
+  "epochs_completed": 9,
+  "total_parameters": 120562755,
+  "trainable_parameters": 494595,
+  "run_directory": "artifacts\\runs\\cnn_bert_mvsa_single_v1"
+}

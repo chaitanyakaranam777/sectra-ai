@@ -1,0 +1,62 @@
+﻿"""Image validation and torchvision transforms."""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Optional
+
+import numpy as np
+import torch
+from PIL import Image, UnidentifiedImageError
+from torchvision import transforms as T
+
+from ml.constants import IMAGENET_MEAN, IMAGENET_STD
+
+
+@dataclass
+class ImageCheck:
+    valid: bool
+    width: int = 0
+    height: int = 0
+    reason: Optional[str] = None
+
+
+def check_image(path: str | Path, min_side: int = 32, min_std: float = 1.0) -> ImageCheck:
+    """Decode fully and flag unreadable, tiny or near-constant (blank) images."""
+    try:
+        with Image.open(path) as im:
+            im.load()
+            rgb = im.convert("RGB")
+            w, h = rgb.size
+            if min(w, h) < min_side:
+                return ImageCheck(False, w, h, f"too_small(<{min_side}px)")
+            if float(np.asarray(rgb.resize((32, 32)), dtype=np.float32).std()) < min_std:
+                return ImageCheck(False, w, h, "blank_image")
+            return ImageCheck(True, w, h)
+    except (UnidentifiedImageError, OSError, ValueError, SyntaxError) as exc:
+        return ImageCheck(False, 0, 0, f"unreadable({type(exc).__name__})")
+
+
+def load_rgb(source: str | Path | Image.Image) -> Image.Image:
+    """Open (or accept) an image and return it as 3-channel RGB."""
+    if isinstance(source, Image.Image):
+        return source.convert("RGB")
+    with Image.open(source) as im:
+        return im.convert("RGB")
+
+
+def build_transforms(image_size: int = 224, train: bool = False) -> T.Compose:
+    """Resize -> (train: flip + mild colour jitter) -> tensor -> ImageNet normalisation."""
+    ops: list = [T.Resize((image_size, image_size))]
+    if train:
+        ops += [T.RandomHorizontalFlip()]
+    ops += [T.ToTensor(), T.Normalize(IMAGENET_MEAN, IMAGENET_STD)]
+    return T.Compose(ops)
+
+
+def denormalize(t: torch.Tensor) -> np.ndarray:
+    """``(3,H,W)`` normalised tensor -> ``(H,W,3)`` uint8 array (for explanation overlays)."""
+    mean = torch.tensor(IMAGENET_MEAN).view(3, 1, 1)
+    std = torch.tensor(IMAGENET_STD).view(3, 1, 1)
+    return ((t.cpu() * std + mean).clamp(0, 1).permute(1, 2, 0).numpy() * 255).astype(np.uint8)
+

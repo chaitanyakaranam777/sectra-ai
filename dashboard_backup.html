@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENTRA AI | Intelligence Console</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080d18;color:#e5edf8;font-family:Segoe UI,Arial,sans-serif}
+header{height:72px;border-bottom:1px solid #202b40;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#0c1423;position:sticky;top:0;z-index:5}
+.logo{font-size:21px;font-weight:800;letter-spacing:2px;color:#61e8d2}.logo span{color:white}.status{color:#61e8a8;font-size:12px}
+main{max-width:1450px;margin:auto;padding:35px 5%}h1{font-size:32px;margin:0 0 8px}.sub{color:#8292aa;margin-bottom:28px}
+.section{margin-top:34px}.section h2{font-size:17px;margin-bottom:17px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card,.model,.panel{background:#111c2e;border:1px solid #26344b;border-radius:13px;padding:20px}.metric{font-size:29px;font-weight:750;margin-top:12px;color:#64e8d2}.muted{color:#8292aa;font-size:12px}
+.models{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.model strong{display:block;font-size:17px;margin-bottom:12px}.tag{color:#61e8d2;font-size:11px}
+.panel{padding:23px}button{background:#55dcca;color:#07151a;border:0;border-radius:7px;padding:11px 17px;font-weight:700;cursor:pointer}
+input,textarea,select{width:100%;background:#091321;border:1px solid #30425d;color:white;padding:13px;border-radius:8px;margin:10px 0 15px;font:inherit}
+textarea{min-height:110px;resize:vertical}pre{background:#08111e;color:#9be9d9;padding:16px;border-radius:9px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}footer{text-align:center;color:#64758e;padding:30px;border-top:1px solid #202b40;margin-top:45px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.models{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:500px){.grid,.models{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="logo">SENTRA<span> AI</span></div><div class="status" id="topStatus">● CONNECTING</div></header>
+<main><h1>Intelligence Control Center</h1><div class="sub">Multimodal Sentiment Analysis & Neural Intelligence Platform</div>
+<div class="grid">
+<div class="card"><div class="muted">SYSTEM STATUS</div><div class="metric" id="health">Checking</div><div class="muted">API connection</div></div>
+<div class="card"><div class="muted">AI ARCHITECTURES</div><div class="metric" id="modelCount">--</div><div class="muted">Registered models</div></div>
+<div class="card"><div class="muted">TRAINING RUNS</div><div class="metric" id="runCount">--</div><div class="muted">Recorded runs</div></div>
+<div class="card"><div class="muted">COMPUTE DEVICE</div><div class="metric" id="device">--</div><div class="muted">Inference environment</div></div></div>
+<section class="section"><h2>01 / Neural Architecture Registry</h2><div class="models" id="models"></div></section>
+<section class="section"><h2>02 / Dataset Intelligence</h2><div class="panel"><div class="muted">REGISTERED DATASETS</div><pre id="datasets">Loading...</pre></div></section>
+<section class="section"><h2>03 / AI Prediction Lab</h2><div class="two">
+<div class="panel"><div class="muted">TEXT SENTIMENT ANALYSIS</div><textarea id="inputText" placeholder="Enter text to analyze sentiment..."></textarea><button onclick="predict()">RUN AI PREDICTION →</button><p id="prediction"></p></div>
+<div class="panel"><div class="muted">PREDICTION OUTPUT</div><pre id="result">Awaiting input...</pre></div></div></section>
+<section class="section"><h2>04 / Training & Evaluation Monitor</h2><div class="two">
+<div class="panel"><div class="muted">TRAINING RUNS</div><pre id="runs">Loading...</pre></div>
+<div class="panel"><div class="muted">MODEL COMPARISON</div><pre id="comparison">Loading...</pre></div></div></section>
+<section class="section"><h2>05 / System Diagnostics</h2><div class="panel"><button onclick="refresh()">REFRESH ALL DATA ↻</button><pre id="diagnostics">Connecting...</pre></div></section>
+</main><footer>SENTRA AI · INTELLIGENCE ENGINE · LOCAL DEVELOPMENT ENVIRONMENT</footer>
+<script>
+const API="http://127.0.0.1:8001";
+async function get(path){const r=await fetch(API+path);const d=await r.json();if(!r.ok)throw Error(JSON.stringify(d));return d}
+function show(id,d){document.getElementById(id).textContent=JSON.stringify(d,null,2)}
+async function refresh(){let log=[];
+try{const h=await get("/api/health");health.textContent="ONLINE";device.textContent=h.device.toUpperCase();topStatus.textContent="● SYSTEM CONNECTED";log.push("API: ONLINE","PyTorch: "+h.torch,"CUDA: "+h.cuda_available,"Database: "+h.database)}
+catch(e){health.textContent="OFFLINE";topStatus.textContent="● API OFFLINE";log.push("API ERROR: "+e.message)}
+try{const m=await get("/api/models");modelCount.textContent=m.length;document.getElementById("models").innerHTML=m.map(x=>`<div class="model"><strong>${x.name.toUpperCase()}</strong><div class="tag">${x.modality}</div><p class="muted">${x.description||"Neural architecture"}</p><div class="muted">Runs: ${x.runs.length}</div></div>`).join("")}catch(e){log.push("MODEL ERROR: "+e.message)}
+try{show("datasets",await get("/api/datasets"))}catch(e){show("datasets",{error:e.message})}
+try{const r=await get("/api/training/runs");runCount.textContent=r.length;show("runs",r)}catch(e){show("runs",{error:e.message})}
+try{show("comparison",await get("/api/evaluation/comparison"))}catch(e){show("comparison",{error:e.message})}
+diagnostics.textContent=log.join("\n")}
+async function predict(){const t=inputText.value.trim();if(!t){alert("Enter text first");return}result.textContent="Processing...";
+try{const r=await fetch(API+"/api/predict/text",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:t})});const d=await r.json();show("result",d);prediction.textContent=r.ok?"Prediction completed":"Prediction unavailable"}
+catch(e){show("result",{error:e.message})}}
+refresh();setInterval(refresh,15000);
+</script></body></html>

@@ -1,0 +1,42 @@
+﻿.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+logs/
+*.log
+data/raw/
+data/interim/
+
+# Python environments and cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+logs/
+*.log
+.DS_Store
+Thumbs.db
+
+# Unnecessary datasets
+data/raw/
+data/interim/
+
+# Exclude all model checkpoints except final CNN+BERT best model
+artifacts/runs/*/*.pt
+!artifacts/runs/cnn_bert_mvsa_single_v1/best.pt

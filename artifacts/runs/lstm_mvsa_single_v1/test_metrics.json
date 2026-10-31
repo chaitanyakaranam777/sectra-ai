@@ -1,0 +1,77 @@
+{
+  "run": "lstm_mvsa_single_v1",
+  "model": "lstm",
+  "split": "test",
+  "test_fingerprint": "d28a38abf97419d152bc60dc9e356dbe5319d1f96d44193832278c4a66feccbc",
+  "metrics": {
+    "n_samples": 451,
+    "accuracy": 0.49889135254988914,
+    "precision_macro": 0.47951778724136446,
+    "recall_macro": 0.5072907176469096,
+    "f1_macro": 0.4403752048701078,
+    "f1_weighted": 0.5299993976667384,
+    "roc_auc_ovr_macro": 0.6734319553369771,
+    "per_class": {
+      "negative": {
+        "precision": 0.5119047619047619,
+        "recall": 0.31851851851851853,
+        "f1": 0.3926940639269406,
+        "support": 135
+      },
+      "neutral": {
+        "precision": 0.18518518518518517,
+        "recall": 0.6382978723404256,
+        "f1": 0.28708133971291866,
+        "support": 47
+      },
+      "positive": {
+        "precision": 0.7414634146341463,
+        "recall": 0.5650557620817844,
+        "f1": 0.6413502109704642,
+        "support": 269
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "matrix": [
+        [
+          43,
+          52,
+          40
+        ],
+        [
+          4,
+          30,
+          13
+        ],
+        [
+          37,
+          80,
+          152
+        ]
+      ],
+      "normalized": [
+        [
+          0.318519,
+          0.385185,
+          0.296296
+        ],
+        [
+          0.085106,
+          0.638298,
+          0.276596
+        ],
+        [
+          0.137546,
+          0.297398,
+          0.565056
+        ]
+      ]
+    },
+    "classification_report": "              precision    recall  f1-score   support\n\n    negative       0.51      0.32      0.39       135\n     neutral       0.19      0.64      0.29        47\n    positive       0.74      0.57      0.64       269\n\n    accuracy                           0.50       451\n   macro avg       0.48      0.51      0.44       451\nweighted avg       0.61      0.50      0.53       451\n"
+  }
+}

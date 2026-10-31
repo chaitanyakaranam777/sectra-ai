@@ -1,0 +1,12 @@
+{
+  "state": "failed",
+  "total_epochs": 3,
+  "device": "cpu",
+  "model": "cnn",
+  "started_at": 1793423055.3607364,
+  "epoch": 1,
+  "batch": 90,
+  "batches_per_epoch": 226,
+  "running_train_loss": 1.1313503682613373,
+  "error": "KeyboardInterrupt: "
+}

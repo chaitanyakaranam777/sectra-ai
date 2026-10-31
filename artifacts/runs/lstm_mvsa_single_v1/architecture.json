@@ -1,0 +1,37 @@
+{
+  "name": "lstm",
+  "modality": "text",
+  "required_inputs": [
+    "input_ids",
+    "attention_mask"
+  ],
+  "classes": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "parameters_total": 786051,
+  "parameters_trainable": 786051,
+  "components": [
+    {
+      "name": "text_encoder",
+      "type": "LSTMTextEncoder",
+      "parameters": 769408
+    },
+    {
+      "name": "classifier",
+      "type": "Sequential",
+      "parameters": 16643
+    }
+  ],
+  "config": {
+    "vocab_size": 3947,
+    "num_classes": 3,
+    "embed_dim": 128,
+    "hidden_dim": 128,
+    "num_layers": 1,
+    "bidirectional": true,
+    "dropout": 0.4,
+    "head_hidden_dim": 64
+  }
+}

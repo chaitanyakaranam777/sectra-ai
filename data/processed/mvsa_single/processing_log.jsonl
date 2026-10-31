@@ -1,0 +1,7 @@
+{"t": 1793422398.1780016, "stage": "ingestion", "rows": 4869, "label_rows_parsed": 4869, "malformed_label_rows": 0, "label_file": "data\\raw\\MVSA_Single\\labelResultAll.txt", "data_dir": "data\\raw\\MVSA_Single\\data"}
+{"t": 1793422411.1728644, "stage": "validation", "rows_before": 4869, "invalid": 1, "reasons": {"image_blank_image": 1}}
+{"t": 1793422411.1758287, "stage": "label_resolution", "rows_before": 4868, "dropped": 358, "reasons": {"text_image_conflict": 358}, "pair_class_distribution_before": {"negative": 1357, "neutral": 470, "positive": 2683}}
+{"t": 1793422413.7428668, "stage": "duplicate_analysis", "duplicate_ids": 0, "duplicate_images": 42, "duplicate_texts": 266, "rows_in_duplicate_image_groups": 82, "rows_in_duplicate_text_groups": 438}
+{"t": 1793422413.7479045, "stage": "dedupe_ids", "rows_before": 4510, "rows_after": 4510}
+{"t": 1793422415.717392, "stage": "split", "seed": 42, "summary": {"train": {"n": 3608, "class_counts": {"negative": 1087, "neutral": 376, "positive": 2145}, "fraction": 0.8}, "val": {"n": 451, "class_counts": {"negative": 135, "neutral": 47, "positive": 269}, "fraction": 0.1}, "test": {"n": 451, "class_counts": {"negative": 135, "neutral": 47, "positive": 269}, "fraction": 0.1}}, "leakage": {"checked": ["group_id", "id", "image_md5", "text_key"], "leaking_keys": 0}}
+{"t": 1793422415.829696, "stage": "export", "final_samples": 4510, "samples_csv": "data\\processed\\mvsa_single\\samples.csv"}

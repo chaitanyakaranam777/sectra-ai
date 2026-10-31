@@ -1,0 +1,47 @@
+{
+  "split": "val",
+  "test_fingerprint": "60c9838bcf2cfb99eed978055f06bf03f2ac5e7e0b2f3b6a4ebce914c3b2499a",
+  "n_samples": 451,
+  "ranking": [
+    {
+      "run": "bert_cached_mvsa_single_v1",
+      "model": "bert",
+      "accuracy": 0.6607538803,
+      "precision_macro": 0.5866615308,
+      "recall_macro": 0.6382959194,
+      "f1_macro": 0.5998421196,
+      "f1_weighted": 0.6728073751,
+      "roc_auc_ovr_macro": 0.7825324987
+    },
+    {
+      "run": "cnn_mvsa_single_v7",
+      "model": "cnn",
+      "accuracy": 0.600886918,
+      "precision_macro": 0.5321957827,
+      "recall_macro": 0.5722229546,
+      "f1_macro": 0.5436659005,
+      "f1_weighted": 0.6120073077,
+      "roc_auc_ovr_macro": 0.7250485333
+    },
+    {
+      "run": "bert_mvsa_single_v1",
+      "model": "bert",
+      "accuracy": 0.6518847007,
+      "precision_macro": 0.6043724651,
+      "recall_macro": 0.5375275246,
+      "f1_macro": 0.5373814363,
+      "f1_weighted": 0.645579043,
+      "roc_auc_ovr_macro": 0.7728050347
+    },
+    {
+      "run": "lstm_mvsa_single_v1",
+      "model": "lstm",
+      "accuracy": 0.4368070953,
+      "precision_macro": 0.4303030303,
+      "recall_macro": 0.4383666168,
+      "f1_macro": 0.3957303182,
+      "f1_weighted": 0.4761620368,
+      "roc_auc_ovr_macro": 0.6066362594
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "state": "completed",
+  "total_epochs": 3,
+  "device": "cpu",
+  "model": "lstm",
+  "started_at": 1793422627.4894254,
+  "epoch": 3,
+  "batch": 113,
+  "batches_per_epoch": 113,
+  "running_train_loss": 1.023315309685244,
+  "last_epoch": {
+    "epoch": 3,
+    "train_loss": 1.023315309685244,
+    "train_acc": 0.5091463414634146,
+    "val_loss": 1.0774447510882121,
+    "val_acc": 0.43680709534368073,
+    "val_macro_f1": 0.3957303181876221,
+    "lr": 0.0,
+    "duration_s": 5.4915525913238525
+  },
+  "best_epoch": 3,
+  "best_metric": 0.3957303181876221,
+  "duration_s": 17.56893563270569
+}

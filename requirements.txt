@@ -1,0 +1,17 @@
+# Core (CPU is enough for every test; see docs/GPU.md for CUDA builds of torch)
+torch>=2.2
+torchvision>=0.17
+transformers>=4.40
+scikit-learn>=1.3
+pandas>=2.0
+numpy>=1.24
+pillow>=10.0
+pyyaml>=6.0
+# API
+fastapi>=0.110
+uvicorn>=0.27
+httpx>=0.26
+python-multipart>=0.0.9
+# Tests
+pytest>=8.0
+sqlalchemy>=2.0

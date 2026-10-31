@@ -1,0 +1,39 @@
+{
+  "name": "cnn",
+  "modality": "image",
+  "required_inputs": [
+    "image"
+  ],
+  "classes": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "parameters_total": 1206499,
+  "parameters_trainable": 1206499,
+  "components": [
+    {
+      "name": "image_encoder",
+      "type": "ImageEncoder",
+      "parameters": 1173216
+    },
+    {
+      "name": "classifier",
+      "type": "Sequential",
+      "parameters": 33283
+    }
+  ],
+  "config": {
+    "num_classes": 3,
+    "backbone": "scratch",
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "pretrained": false,
+    "hidden_dim": 128,
+    "dropout": 0.4
+  }
+}

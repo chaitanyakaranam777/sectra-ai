@@ -1,0 +1,24 @@
+{
+  "state": "completed",
+  "total_epochs": 1,
+  "device": "cpu",
+  "model": "cnn",
+  "started_at": 1793424785.8769383,
+  "epoch": 1,
+  "batch": 451,
+  "batches_per_epoch": 451,
+  "running_train_loss": 1.1326856462495554,
+  "last_epoch": {
+    "epoch": 1,
+    "train_loss": 1.1326856462495554,
+    "train_acc": 0.4534368070953437,
+    "val_loss": 1.0735931196921151,
+    "val_acc": 0.5964523281596452,
+    "val_macro_f1": 0.2490740740740741,
+    "lr": 0.0,
+    "duration_s": 189.55019688606262
+  },
+  "best_epoch": 1,
+  "best_metric": 0.2490740740740741,
+  "duration_s": 189.61334252357483
+}

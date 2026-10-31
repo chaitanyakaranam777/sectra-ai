@@ -1,0 +1,17 @@
+{
+  "split": "test",
+  "test_fingerprint": "d28a38abf97419d152bc60dc9e356dbe5319d1f96d44193832278c4a66feccbc",
+  "n_samples": 451,
+  "ranking": [
+    {
+      "run": "lstm_mvsa_single_v1",
+      "model": "lstm",
+      "accuracy": 0.4988913525,
+      "precision_macro": 0.4795177872,
+      "recall_macro": 0.5072907176,
+      "f1_macro": 0.4403752049,
+      "f1_weighted": 0.5299993977,
+      "roc_auc_ovr_macro": 0.6734319553
+    }
+  ]
+}
