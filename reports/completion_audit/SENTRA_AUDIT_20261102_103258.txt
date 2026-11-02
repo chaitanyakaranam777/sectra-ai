@@ -1,0 +1,123 @@
+﻿============================================================
+                  SENTRA AI AUDIT REPORT
+============================================================
+
+Date: 11/02/2026 10:33:25
+
+Project: C:\Users\chaitanya\Downloads\SENTRA_AI\sentra-ai
+
+TOTAL CHECKS: 82
+PASSED: 63
+FAILED: 9
+MISSING: 8
+SKIPPED: 0
+
+============================================================
+DETAILED RESULTS
+============================================================
+
+
+Category          Item                                             Status  Details                                     
+--------          ----                                             ------  -------                                     
+PROJECT STRUCTURE backend                                          PASS    File or folder exists                       
+PROJECT STRUCTURE frontend                                         MISSING Not found                                   
+PROJECT STRUCTURE dashboard                                        MISSING Not found                                   
+PROJECT STRUCTURE data                                             PASS    File or folder exists                       
+PROJECT STRUCTURE data\raw                                         PASS    File or folder exists                       
+PROJECT STRUCTURE data\processed                                   PASS    File or folder exists                       
+PROJECT STRUCTURE artifacts                                        PASS    File or folder exists                       
+PROJECT STRUCTURE artifacts\runs                                   PASS    File or folder exists                       
+PROJECT STRUCTURE scripts                                          PASS    File or folder exists                       
+PROJECT STRUCTURE models                                           MISSING Not found                                   
+PROJECT STRUCTURE tests                                            PASS    File or folder exists                       
+PROJECT STRUCTURE cloudflare-site                                  PASS    File or folder exists                       
+PROJECT STRUCTURE src                                              PASS    File or folder exists                       
+PROJECT STRUCTURE wrangler.jsonc                                   PASS    File or folder exists                       
+PROJECT STRUCTURE backend\main.py                                  PASS    File or folder exists                       
+PROJECT STRUCTURE requirements.txt                                 PASS    File or folder exists                       
+PROJECT STRUCTURE README.md                                        PASS    File or folder exists                       
+PROJECT STRUCTURE .venv\Scripts\python.exe                         PASS    File or folder exists                       
+PYTHON            Virtual environment                              PASS    Python 3.14.0                               
+PYTHON            Package inspection                               PASS    Package availability printed above          
+DATASET           data\raw\MVSA_Single                             PASS    File or folder exists                       
+DATASET           data\raw\MVSA_Single\data                        PASS    File or folder exists                       
+DATASET           data\processed\mvsa_single                       PASS    File or folder exists                       
+DATASET           data\processed\mvsa_single\samples.csv           PASS    File or folder exists                       
+DATASET           Processed sample count                           INFO    4510 rows                                   
+MODEL             cnn_bert_mvsa_single_v1                          PASS    Run folder exists                           
+MODEL FILE        cnn_bert_mvsa_single_v1\best.pt                  PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\config.json              PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\status.json              PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\summary.json             PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\test_metrics.json        PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\val_metrics.json         PASS    Available                                   
+MODEL FILE        cnn_bert_mvsa_single_v1\history.json             PASS    Available                                   
+MODEL             bert_cached_mvsa_single_v1                       PASS    Run folder exists                           
+MODEL FILE        bert_cached_mvsa_single_v1\best.pt               PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\config.json           PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\status.json           PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\summary.json          PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\test_metrics.json     PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\val_metrics.json      PASS    Available                                   
+MODEL FILE        bert_cached_mvsa_single_v1\history.json          PASS    Available                                   
+MODEL             cnn_mvsa_single_v7                               PASS    Run folder exists                           
+MODEL FILE        cnn_mvsa_single_v7\best.pt                       PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\config.json                   PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\status.json                   PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\summary.json                  PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\test_metrics.json             PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\val_metrics.json              PASS    Available                                   
+MODEL FILE        cnn_mvsa_single_v7\history.json                  PASS    Available                                   
+MODEL             lstm_mvsa_single_v1                              PASS    Run folder exists                           
+MODEL FILE        lstm_mvsa_single_v1\best.pt                      PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\config.json                  PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\status.json                  PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\summary.json                 PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\test_metrics.json            PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\val_metrics.json             PASS    Available                                   
+MODEL FILE        lstm_mvsa_single_v1\history.json                 PASS    Available                                   
+LOCAL API         /api/health                                      FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/models                                      FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/datasets                                    FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/datasets/statistics?dataset=mvsa_single     FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/datasets/processing-log?dataset=mvsa_single FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/training/runs                               FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/evaluation/cnn_bert_mvsa_single_v1          FAIL    HTTP ERROR - Unable to connect to the rem...
+LOCAL API         /api/predictions/history                         FAIL    HTTP ERROR - Unable to connect to the rem...
+DASHBOARD         cloudflare-site\index.html                       PASS    File or folder exists                       
+DASHBOARD         dashboard\app.py                                 MISSING Not found                                   
+DASHBOARD         frontend\index.html                              MISSING Not found                                   
+DASHBOARD         index.html                                       MISSING Not found                                   
+DASHBOARD         src\index.js                                     PASS    File or folder exists                       
+DASHBOARD         HTML files found                                 INFO    6 files                                     
+DEPLOYMENT        wrangler.jsonc                                   PASS    File or folder exists                       
+DEPLOYMENT        src\index.js                                     PASS    File or folder exists                       
+PUBLIC DEPLOYMENT Public API health                                FAIL    The remote server returned an error: (530...
+PUBLIC DEPLOYMENT Dashboard website                                PASS    HTTP 200                                    
+TESTING           tests                                            PASS    File or folder exists                       
+TESTING           pytest.ini                                       PASS    File or folder exists                       
+TESTING           pyproject.toml                                   MISSING Not found                                   
+DOCUMENTATION     README.md                                        PASS    File or folder exists                       
+DOCUMENTATION     docs                                             PASS    File or folder exists                       
+DOCUMENTATION     requirements.txt                                 PASS    File or folder exists                       
+DOCUMENTATION     LICENSE                                          MISSING Not found                                   
+
+
+
+
+============================================================
+IMPORTANT
+============================================================
+
+This is an automated project audit, not a certification
+of full project completion.
+
+HTTP 200 indicates an endpoint responded successfully.
+It does not guarantee every feature is functionally correct.
+
+Explanation endpoint failures require backend traceback
+inspection before code changes.
+
+============================================================
+END OF REPORT
+============================================================

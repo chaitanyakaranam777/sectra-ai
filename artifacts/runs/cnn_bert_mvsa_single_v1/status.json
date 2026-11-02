@@ -1,0 +1,9 @@
+{
+  "state": "completed",
+  "model": "cnn_bert",
+  "device": "cpu",
+  "total_epochs": 9,
+  "epoch": 9,
+  "best_epoch": 4,
+  "best_metric": 0.613385960444784
+}
