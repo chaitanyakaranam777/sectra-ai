@@ -40,3 +40,31 @@ data/interim/
 # Exclude all model checkpoints except final CNN+BERT best model
 artifacts/runs/*/*.pt
 !artifacts/runs/cnn_bert_mvsa_single_v1/best.pt
+
+# Local Cloudflare Wrangler cache
+.wrangler/
+
+# Python environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Datasets and large training outputs
+data/raw/
+artifacts/runs/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,19 @@
+﻿{
+    "$schema":  "https://schema.cloudflare.com/wrangler/config-schema.json",
+    "name":  "sectra-ai",
+    "main":  "src/index.js",
+    "compatibility_date":  "2026-10-31",
+    "ai":  {
+               "binding":  "AI"
+           },
+    "assets":  {
+                   "directory":  "./cloudflare-site",
+                   "binding":  "ASSETS",
+                   "run_worker_first":  [
+                                            "/api/*"
+                                        ]
+               },
+    "vars":  {
+                 "BACKEND_URL":  "https://strategy-substance-concerned-successfully.trycloudflare.com"
+             }
+}

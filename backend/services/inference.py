@@ -51,19 +51,64 @@ class InferenceService:
         self.s, self.store, self.cache = settings, store, PredictorCache()
 
     def choose_run(self, mode: str, run_id: Optional[str] = None) -> str:
-        """Explicit ``run_id`` (must match mode) or the completed run of that modality with the best validation metric."""
-        runs = [r for r in self.store.list_runs() if r["state"] == "completed" and r["model"]
-                and (self.store.run_dir(r["run_id"]) / "best.pt").is_file()]
+        """Choose the best eligible completed checkpoint using test evaluation metrics."""
+        runs = [
+            r for r in self.store.list_runs()
+            if r["state"] == "completed"
+            and r["model"]
+            and (self.store.run_dir(r["run_id"]) / "best.pt").is_file()
+        ]
+
         from ml.architectures import MODEL_REGISTRY
-        runs = [r for r in runs if MODEL_REGISTRY[r["model"]].cls.modality == mode]
+
+        runs = [
+            r for r in runs
+            if r["model"] in MODEL_REGISTRY
+            and MODEL_REGISTRY[r["model"]].cls.modality == mode
+        ]
+
         if run_id:
             match = [r for r in runs if r["run_id"] == run_id]
             if not match:
                 raise InferenceError(404, f"No completed {mode} run '{run_id}'")
             return run_id
+
         if not runs:
-            raise InferenceError(409, f"No trained {mode} model available. Train one first (POST /api/models/train).")
-        return max(runs, key=lambda r: r["best_metric"] if r["best_metric"] is not None else -1)["run_id"]
+            raise InferenceError(
+                409,
+                f"No trained {mode} model available. Train one first (POST /api/models/train)."
+            )
+
+        available = {r["run_id"] for r in runs}
+
+        # Prefer actual test evaluation metrics over training best_metric.
+        try:
+            ranking = self.store.comparison().get("ranking", [])
+            evaluated = [
+                item for item in ranking
+                if item.get("run") in available
+            ]
+
+            if evaluated:
+                best = max(
+                    evaluated,
+                    key=lambda item: (
+                        float(item.get("f1_macro", -1)),
+                        float(item.get("accuracy", -1))
+                    )
+                )
+                return best["run"]
+
+        except (ValueError, TypeError, KeyError):
+            pass
+
+        # Fallback when evaluation comparison is unavailable.
+        return max(
+            runs,
+            key=lambda r: (
+                r["best_metric"] if r["best_metric"] is not None else -1
+            )
+        )["run_id"]
 
     def predictor(self, run_id: str) -> Predictor:
         return self.cache.get(self.store.run_dir(run_id) / "best.pt")
