@@ -595,10 +595,10 @@ def get_runs():
             runs.append({
                 "Run": str(folder.name),
                 "Model": str(config.get("model", folder.name.split("_")[0])),
-                "Dataset": str(config.get("dataset", "—")),
+                "Dataset": str(config.get("dataset", "â€”")),
                 "Status": str(status.get("status", "unknown")),
-                "Epochs": str(config.get("epochs", status.get("total_epochs", "—"))),
-                "Device": str(config.get("device", status.get("device", "—"))),
+                "Epochs": str(config.get("epochs", status.get("total_epochs", "â€”"))),
+                "Device": str(config.get("device", status.get("device", "â€”"))),
                 "Updated": datetime.fromtimestamp(folder.stat().st_mtime).strftime("%Y-%m-%d %H:%M"),
             })
     return runs
@@ -666,6 +666,134 @@ architecture = [
 ]
 
 
+
+# SENTRA INPUT READABILITY FIX
+st.markdown("""
+<style>
+/* Prediction Lab text area */
+div[data-testid="stTextArea"] textarea {
+    background-color: #FFFFFF !important;
+    color: #172033 !important;
+    -webkit-text-fill-color: #172033 !important;
+    caret-color: #2563EB !important;
+    border: 1px solid #CBD5E1 !important;
+    font-size: 15px !important;
+}
+
+/* Text area placeholder */
+div[data-testid="stTextArea"] textarea::placeholder {
+    color: #64748B !important;
+    -webkit-text-fill-color: #64748B !important;
+    opacity: 1 !important;
+}
+
+/* Text input fields */
+div[data-testid="stTextInput"] input {
+    background-color: #FFFFFF !important;
+    color: #172033 !important;
+    -webkit-text-fill-color: #172033 !important;
+    caret-color: #2563EB !important;
+    border: 1px solid #CBD5E1 !important;
+}
+
+/* Labels */
+div[data-testid="stTextArea"] label,
+div[data-testid="stTextInput"] label {
+    color: #334155 !important;
+}
+
+/* Focus effect */
+div[data-testid="stTextArea"] textarea:focus,
+div[data-testid="stTextInput"] input:focus {
+    border: 1px solid #526CF0 !important;
+    box-shadow: 0 0 0 2px rgba(82,108,240,0.15) !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# SENTRA PROFESSIONAL DASHBOARD UPGRADE
+st.markdown("""
+<style>
+/* Main dashboard */
+.stApp {
+    background: #F4F7FC;
+}
+[data-testid="stMainBlockContainer"] {
+    max-width: 1500px;
+    padding-top: 2rem;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 17px;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+}
+[data-testid="stMetricLabel"] {
+    color: #64748B !important;
+}
+[data-testid="stMetricValue"] {
+    color: #172554 !important;
+}
+
+/* Tables */
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+}
+
+/* Input fields */
+div[data-testid="stTextArea"] textarea,
+div[data-testid="stTextInput"] input {
+    background: #FFFFFF !important;
+    color: #172033 !important;
+    -webkit-text-fill-color: #172033 !important;
+    caret-color: #2563EB !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+}
+div[data-testid="stTextArea"] textarea::placeholder {
+    color: #64748B !important;
+    -webkit-text-fill-color: #64748B !important;
+    opacity: 1 !important;
+}
+
+/* Select boxes */
+div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+    background: #FFFFFF;
+}
+
+/* Buttons */
+.stButton > button {
+    border-radius: 9px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+}
+
+/* Section headings */
+h1, h2, h3 {
+    color: #172554 !important;
+}
+
+/* Charts and images */
+[data-testid="stImage"],
+[data-testid="stPlotlyChart"] {
+    border-radius: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
 # -------------------- SIDEBAR --------------------
 pages = [
     "Overview",
@@ -799,7 +927,7 @@ header_left, header_right = st.columns([5, 1], vertical_alignment="center")
 with header_left:
     st.markdown(
         f"<div class='topbar'><span>Workspace / <b style='color:#172544'>{page}</b></span>"
-        f"<span style='color:{'#159b79' if health else '#d65b70'};font-weight:800'>● API {'ONLINE' if health else 'OFFLINE'}</span></div>",
+        f"<span style='color:{'#159b79' if health else '#d65b70'};font-weight:800'>â— API {'ONLINE' if health else 'OFFLINE'}</span></div>",
         unsafe_allow_html=True,
     )
 st.markdown("<div class='eyebrow'>MULTIMODAL INTELLIGENCE PLATFORM</div>", unsafe_allow_html=True)
@@ -813,7 +941,7 @@ if page == "Overview":
     metric(c1, "SYSTEM STATUS", "ONLINE" if health else "OFFLINE", "API connection")
     metric(c2, "ARCHITECTURES", str(len(architecture)), "Registered neural models")
     metric(c3, "TRAINING RUNS", str(len(runs)), "Recorded experiments")
-    metric(c4, "COMPUTE DEVICE", str((health or {}).get("device", "—")).upper(), "Inference environment")
+    metric(c4, "COMPUTE DEVICE", str((health or {}).get("device", "â€”")).upper(), "Inference environment")
 
     section("Neural Architecture Registry", "01 / MODEL CATALOG")
     cards = st.columns(3, gap="medium")
@@ -837,11 +965,11 @@ if page == "Overview":
         st.markdown("**REGISTERED DATASETS**")
         if not df.empty:
             st.markdown(f"<div class='metric-value'>{len(df):,}</div>", unsafe_allow_html=True)
-            st.caption(f"Processed samples · {sample_path.relative_to(ROOT) if sample_path else 'MVSA Single'}")
+            st.caption(f"Processed samples Â· {sample_path.relative_to(ROOT) if sample_path else 'MVSA Single'}")
             st.caption(f"{len(df.columns)} available features")
             st.dataframe(df.head(4), width="stretch", hide_index=True)
         else:
-            st.markdown("<div class='metric-value'>—</div>", unsafe_allow_html=True)
+            st.markdown("<div class='metric-value'>â€”</div>", unsafe_allow_html=True)
             st.info("Processed dataset not found. Expected data/processed/mvsa_single/samples.csv.")
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -863,28 +991,52 @@ if page == "Overview":
             st.info("Sentiment labels will appear here when the processed dataset is available.")
         st.markdown("</div>", unsafe_allow_html=True)
 
+
     section("AI Prediction Lab", "03 / LIVE INFERENCE")
     prediction_left, prediction_right = st.columns(2, gap="medium")
+
     with prediction_left:
         st.markdown('<div class="panel">', unsafe_allow_html=True)
         st.markdown("**TEXT SENTIMENT ANALYSIS**")
-        st.caption("TEXT INPUT")
         overview_text = st.text_area(
             "Enter text to analyze",
-            placeholder="Enter a sentence, review or social media post to analyze sentiment...",
-            height=110, label_visibility="collapsed", key="overview_prediction_text",
+            placeholder="Enter a sentence, review or social media post...",
+            height=130,
+            label_visibility="collapsed",
+            key="overview_prediction_text",
         )
+        if st.button("ANALYSE SENTIMENT", key="overview_analyse", type="primary", use_container_width=True):
+            if not overview_text.strip():
+                st.warning("Enter some text first.")
+            else:
+                try:
+                    response = requests.post(
+                        API_BASE + "/api/predict/text",
+                        json={"text": overview_text.strip()},
+                        timeout=45,
+                    )
+                    response.raise_for_status()
+                    result = response.json()
+                    st.session_state["overview_prediction_result"] = result
+                except Exception as exc:
+                    st.error(f"Prediction failed: {exc}")
         st.markdown("</div>", unsafe_allow_html=True)
+
     with prediction_right:
         st.markdown('<div class="panel">', unsafe_allow_html=True)
         st.markdown("**PREDICTION OUTPUT**")
-        st.caption("MODEL RESPONSE")
-        st.markdown(
-            "<div style='background:#111e3b;color:#9db0d2;border-radius:12px;padding:22px 18px;font-size:12px;min-height:128px'>"
-            "SENTIMENT CLASSIFICATION<br><br><b style='color:white;font-size:18px'>Awaiting input</b><br>"
-            "Run an analysis from the Prediction Lab page to view model output.</div>",
-            unsafe_allow_html=True,
-        )
+        result = st.session_state.get("overview_prediction_result")
+        if result:
+            st.success("Prediction completed")
+            st.metric("Sentiment", str(result.get("label", "Unknown")).upper())
+            confidence = result.get("confidence")
+            if isinstance(confidence, (int, float)):
+                st.metric("Confidence", f"{confidence * 100:.2f}%" if confidence <= 1 else f"{confidence:.2f}%")
+            st.caption(f"Model: {result.get('model', 'Default')} | Run: {result.get('run_id', 'Default')}")
+            with st.expander("View prediction details"):
+                st.json(result)
+        else:
+            st.info("Enter text and select ANALYSE SENTIMENT to see the prediction.")
         st.markdown("</div>", unsafe_allow_html=True)
 
 # -------------------- ARCHITECTURES --------------------
@@ -898,7 +1050,8 @@ elif page == "Architectures":
     st.info("SENTRA supports CNN, LSTM, BERT and multimodal CNN-LSTM / CNN-BERT pipelines.")
     if models:
         st.markdown("#### API model registry")
-        st.json(models)
+        with st.expander('View Raw API Response', expanded=False):
+            st.json(models)
 
 
 # -------------------- DATASETS --------------------
@@ -938,62 +1091,164 @@ elif page == "Datasets":
             st.plotly_chart(fig, width="stretch")
 
 
+
 # -------------------- PREDICTION LAB --------------------
 elif page == "Prediction Lab":
     section("AI Prediction Lab", "LIVE INFERENCE")
-    st.caption("Text sentiment inference through your running SENTRA API.")
-    text_input = st.text_area(
-        "TEXT SENTIMENT ANALYSIS",
-        placeholder="Enter a sentence, review or social media post to analyze sentiment...",
-        height=150,
+    st.caption("Analyse text, images, or both using the SENTRA inference API.")
+
+    mode = st.selectbox(
+        "ANALYSIS MODE",
+        ["Text", "Image", "Multimodal"],
+        key="prediction_mode",
     )
-    endpoint = st.text_input(
-        "Prediction endpoint",
-        value="/api/predict/text",
-        help="Change this if your FastAPI route uses a different path.",
-    )
-    if st.button("RUN SENTIMENT ANALYSIS", type="primary"):
-        if not text_input.strip():
-            st.warning("Enter text before running prediction.")
+
+    available_runs = [
+        str(item.get("Run"))
+        for item in runs
+        if isinstance(item, dict) and item.get("Run")
+    ]
+    run_options = ["Default model"] + available_runs
+    selected_run = st.selectbox("MODEL / TRAINING RUN", run_options)
+    run_id = None if selected_run == "Default model" else selected_run
+
+    text_value = ""
+    uploaded_file = None
+
+    if mode in ("Text", "Multimodal"):
+        text_value = st.text_area(
+            "TEXT INPUT",
+            placeholder="Enter a sentence, review or social media post...",
+            height=150,
+            key="prediction_text",
+        )
+
+    if mode in ("Image", "Multimodal"):
+        uploaded_file = st.file_uploader(
+            "UPLOAD IMAGE",
+            type=["png", "jpg", "jpeg", "webp"],
+            key=f"prediction_file_{st.session_state.get('prediction_reset', 0)}",
+        )
+        if uploaded_file is not None:
+            st.image(uploaded_file, caption=uploaded_file.name, width=300)
+
+    action_col, reset_col = st.columns(2)
+    with action_col:
+        analyse = st.button(
+            "ANALYSE SENTIMENT",
+            type="primary",
+            use_container_width=True,
+        )
+    with reset_col:
+        reset = st.button(
+            "CLEAR / RESET",
+            use_container_width=True,
+        )
+
+    if reset:
+        st.session_state["prediction_text"] = ""
+        st.session_state["prediction_mode"] = "Text"
+        st.session_state["prediction_reset"] = st.session_state.get("prediction_reset", 0) + 1
+        st.session_state.pop("prediction_result", None)
+        st.rerun()
+
+    if analyse:
+        if mode in ("Text", "Multimodal") and not text_value.strip():
+            st.warning("Please enter text before analysing.")
+        elif mode in ("Image", "Multimodal") and uploaded_file is None:
+            st.warning("Please upload an image before analysing.")
         else:
-            result, error = None, None
-            for payload in [{"text": text_input}, {"text_raw": text_input}, {"input": text_input}]:
-                try:
-                    response = requests.post(API_BASE + endpoint, json=payload, timeout=45)
-                    if response.ok:
-                        result = response.json()
-                        break
-                    error = f"HTTP {response.status_code}: {response.text[:500]}"
-                except Exception as exc:
-                    error = str(exc)
-            if result:
-                st.success("Prediction received")
-                label = result.get("label", result.get("sentiment", result.get("prediction", "Result")))
-                st.markdown(
-                    f"""<div class="panel">
-                    <div class="metric-label">SENTIMENT CLASSIFICATION</div>
-                    <div class="metric-value">{str(label).upper()}</div>
-                    </div>""",
-                    unsafe_allow_html=True,
-                )
-                st.json(result)
-                probabilities = result.get("probabilities")
-                if isinstance(probabilities, dict):
-                    probability_df = pd.DataFrame({
-                        "Sentiment": list(probabilities.keys()),
-                        "Probability": list(probabilities.values()),
-                    })
-                    fig = px.bar(
-                        probability_df, x="Sentiment", y="Probability",
-                        color="Sentiment", text_auto=".2f",
-                        color_discrete_sequence=["#5e78f4", "#9875e9", "#31c9ae"],
+            try:
+                if mode == "Text":
+                    payload = {"text": text_value.strip()}
+                    if run_id:
+                        payload["run_id"] = run_id
+                    response = requests.post(
+                        API_BASE + "/api/predict/text",
+                        json=payload,
+                        timeout=60,
                     )
-                    fig.update_layout(paper_bgcolor="white", plot_bgcolor="white")
-                    st.plotly_chart(fig, width="stretch")
+                else:
+                    data = {"run_id": run_id} if run_id else {}
+                    files = {
+                        "file": (
+                            uploaded_file.name,
+                            uploaded_file.getvalue(),
+                            uploaded_file.type or "application/octet-stream",
+                        )
+                    }
+                    if mode == "Multimodal":
+                        data["text"] = text_value.strip()
+                        endpoint = "/api/predict/multimodal"
+                    else:
+                        endpoint = "/api/predict/image"
+
+                    response = requests.post(
+                        API_BASE + endpoint,
+                        data=data,
+                        files=files,
+                        timeout=90,
+                    )
+
+                response.raise_for_status()
+                st.session_state["prediction_result"] = response.json()
+                st.success("Prediction completed successfully.")
+
+            except requests.exceptions.HTTPError:
+                st.error(f"API error: HTTP {response.status_code}")
+                st.code(response.text[:1500])
+            except Exception as exc:
+                st.error(f"Prediction failed: {exc}")
+
+    result = st.session_state.get("prediction_result")
+    if result:
+        st.markdown("---")
+        st.subheader("Prediction Results")
+
+        result_col1, result_col2, result_col3 = st.columns(3)
+        with result_col1:
+            st.metric("SENTIMENT", str(result.get("label", "Unknown")).upper())
+        with result_col2:
+            confidence = result.get("confidence")
+            if isinstance(confidence, (int, float)):
+                confidence_display = confidence * 100 if confidence <= 1 else confidence
+                st.metric("CONFIDENCE", f"{confidence_display:.2f}%")
             else:
-                st.error("Prediction API is unavailable or the endpoint/payload does not match.")
-                st.code(f"{API_BASE}{endpoint}\n{error or 'No response'}")
-                st.info("Start your FastAPI backend, then verify the correct route in http://127.0.0.1:8002/docs.")
+                st.metric("CONFIDENCE", "Not provided")
+        with result_col3:
+            st.metric("MODEL", str(result.get("model", "Unknown")))
+
+        st.caption(f"Training run: {result.get('run_id', 'Default model')}")
+
+        probabilities = result.get("probabilities")
+        if isinstance(probabilities, dict) and probabilities:
+            probability_df = pd.DataFrame({
+                "Sentiment": list(probabilities.keys()),
+                "Probability": list(probabilities.values()),
+            })
+            probability_df["Probability"] = pd.to_numeric(
+                probability_df["Probability"], errors="coerce"
+            )
+            probability_df = probability_df.dropna()
+
+            if not probability_df.empty:
+                fig = px.bar(
+                    probability_df,
+                    x="Sentiment",
+                    y="Probability",
+                    color="Sentiment",
+                    text_auto=".2f",
+                    color_discrete_sequence=["#5e78f4", "#9875e9", "#31c9ae"],
+                )
+                fig.update_layout(
+                    paper_bgcolor="white",
+                    plot_bgcolor="white",
+                    font_color="#263858",
+                )
+                st.plotly_chart(fig, width="stretch")
+
+        with st.expander("View Raw Prediction Response"):
+            st.json(result)
 
 
 # -------------------- TRAINING MONITOR --------------------
@@ -1003,7 +1258,7 @@ elif page == "Training Monitor":
         run_df = pd.DataFrame(runs)
         # Explicit string conversion prevents ArrowTypeError for mixed Epochs values.
         for column in run_df.columns:
-            run_df[column] = run_df[column].fillna("—").astype(str)
+            run_df[column] = run_df[column].fillna("â€”").astype(str)
         st.dataframe(run_df, width="stretch", hide_index=True)
         status_counts = run_df["Status"].value_counts().rename_axis("Status").reset_index(name="Runs")
         fig = px.bar(
@@ -1015,9 +1270,11 @@ elif page == "Training Monitor":
         selected = st.selectbox("Inspect run", run_df["Run"].tolist())
         run_path = ARTIFACTS / "runs" / selected
         st.markdown("#### Run configuration")
-        st.json(read_json(run_path / "config.json"))
+        with st.expander('View Raw API Response', expanded=False):
+            st.json(read_json(run_path / "config.json"))
         st.markdown("#### Run status")
-        st.json(read_json(run_path / "status.json"))
+        with st.expander('View Raw API Response', expanded=False):
+            st.json(read_json(run_path / "status.json"))
     else:
         st.info("No training run folders found in artifacts/runs.")
     if st.button("Refresh training data"):
@@ -1031,13 +1288,15 @@ elif page == "Diagnostics":
     st.markdown("#### API connection")
     if health:
         st.success("Backend API is responding.")
-        st.json(health)
+        with st.expander('View Raw API Response', expanded=False):
+            st.json(health)
     else:
         st.error(f"Backend offline: {health_error}")
         st.code(f"API base: {API_BASE}\nExpected health route: {API_BASE}/api/health")
     st.markdown("#### Model registry response")
     if models:
-        st.json(models)
+        with st.expander('View Raw API Response', expanded=False):
+            st.json(models)
     else:
         st.warning(f"Could not load /api/models: {models_error}")
     st.markdown("#### Local project assets")
@@ -1074,7 +1333,8 @@ if page == "Model Comparison":
     if comparison_file.exists():
         try:
             comparison_data = json.loads(comparison_file.read_text(encoding="utf-8"))
-            st.json(comparison_data)
+            with st.expander('View Raw API Response', expanded=False):
+                st.json(comparison_data)
         except Exception as exc:
             st.warning(f"Could not read comparison results: {exc}")
     else:
